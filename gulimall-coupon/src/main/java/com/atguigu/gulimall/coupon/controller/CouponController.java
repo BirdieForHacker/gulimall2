@@ -5,6 +5,7 @@ import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,28 @@ import com.atguigu.common.utils.R;
 public class CouponController {
     @Autowired
     private CouponService couponService;
+
+    @Value("${user.name}")
+    private String name;
+    @Value("${user.age}")
+    private Integer age;
+
+    /**
+     * 测试服务
+     * @return
+     */
+    @RequestMapping("/member/list")
+    public  R membercoupons(){
+        CouponEntity couponEntity = new CouponEntity();
+        couponEntity.setCouponName("满100见10");
+        return R.ok().put("coupons",Arrays.asList(couponEntity));
+    }
+
+    @RequestMapping("/test")
+    public R test(){
+
+        return null;
+    }
 
     /**
      * 列表
