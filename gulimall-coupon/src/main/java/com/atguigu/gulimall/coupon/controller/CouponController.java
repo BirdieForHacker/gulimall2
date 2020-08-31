@@ -6,6 +6,7 @@ import java.util.Map;
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,15 +27,16 @@ import com.atguigu.common.utils.R;
  * @email BirdieForLove@gmail.com
  * @date 2020-08-30 14:49:23
  */
+@RefreshScope
 @RestController
 @RequestMapping("coupon/coupon")
 public class CouponController {
     @Autowired
     private CouponService couponService;
 
-    @Value("${user.name}")
+    @Value("${coupon.user.name}")
     private String name;
-    @Value("${user.age}")
+    @Value("${coupon.user.age}")
     private Integer age;
 
     /**
@@ -51,7 +53,7 @@ public class CouponController {
     @RequestMapping("/test")
     public R test(){
 
-        return null;
+        return R.ok().put("name",name).put("age",age);
     }
 
     /**
